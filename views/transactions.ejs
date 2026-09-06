@@ -24,7 +24,7 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th>Date</th>
+              <th>Date &amp; Time</th>
               <th>Description</th>
               <th>Amount</th>
               <th>Status</th>
@@ -34,7 +34,7 @@
           <tbody>
             <% transactions.slice().reverse().forEach(function(t) { %>
               <tr>
-                <td><%= formatDate(t.date) %></td>
+                <td><%= formatDateTime(t.occurredAt) %></td>
                 <td><%= t.description %></td>
                 <td><%= formatMoney(t.amount) %></td>
                 <td><span class="badge badge-success"><%= t.status %></span></td>

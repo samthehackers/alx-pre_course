@@ -73,7 +73,7 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th>Date</th>
+              <th>Date &amp; Time</th>
               <th>Feature</th>
               <th>Duration</th>
               <th>Credits Consumed</th>
@@ -83,7 +83,7 @@
           <tbody>
             <% sessions.forEach(function(s) { %>
               <tr>
-                <td><%= formatDate(s.date) %></td>
+                <td><%= formatDateTime(s.occurredAt) %></td>
                 <td><%= product(s.feature).label %></td>
                 <td><%= formatDuration(s.durationSeconds) %></td>
                 <td><%= formatMoney(s.creditsConsumed) %></td>

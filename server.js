@@ -19,6 +19,13 @@ app.locals.formatDate = (isoDate) => {
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 };
 
+app.locals.formatDateTime = (isoTimestamp) => {
+  const date = new Date(isoTimestamp);
+  const datePart = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+  const timePart = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'UTC' });
+  return `${datePart} • ${timePart}`;
+};
+
 app.locals.formatDuration = (seconds) => {
   const s = Math.round(seconds);
   if (s < 60) return `${s}s`;

@@ -62,12 +62,12 @@
     <div class="table-wrap">
       <table class="data-table">
         <thead>
-          <tr><th>Date</th><th>Description</th><th>Amount</th><th>Status</th></tr>
+          <tr><th>Date &amp; Time</th><th>Description</th><th>Amount</th><th>Status</th></tr>
         </thead>
         <tbody>
           <% recentTransactions.forEach(function(t) { %>
             <tr>
-              <td><%= formatDate(t.date) %></td>
+              <td><%= formatDateTime(t.occurredAt) %></td>
               <td><%= t.description %></td>
               <td><%= formatMoney(t.amount) %></td>
               <td><span class="badge badge-success"><%= t.status %></span></td>

@@ -852,13 +852,6 @@ table.data-table {
   margin-bottom: 22px;
 }
 
-.price-note {
-  text-align: center;
-  color: var(--text-faint);
-  font-size: 0.85rem;
-  margin-top: 24px;
-}
-
 @media (max-width: 640px) {
   .pricing-grid {
     grid-template-columns: 1fr;
@@ -1309,26 +1302,6 @@ table.data-table {
   color: var(--text-muted);
 }
 
-.checkout-note {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  font-size: 0.83rem;
-  color: var(--text-muted);
-  margin-top: 16px;
-}
-
-.checkout-note svg {
-  flex: none;
-  width: 16px;
-  height: 16px;
-  margin-top: 2px;
-  color: var(--text-faint);
-}
 
 /* ---- Real-time feature pages ---- */
 

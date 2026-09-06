@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Abstract neural network visual representing the Folklore AI technology layer">
+  <defs>
+    <linearGradient id="tech-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#171340"/>
+      <stop offset="100%" stop-color="#0a0a14"/>
+    </linearGradient>
+    <radialGradient id="tech-glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#8b7ffb" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#8b7ffb" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="600" rx="24" fill="url(#tech-bg)"/>
+  <circle cx="400" cy="300" r="300" fill="url(#tech-glow)"/>
+
+  <g stroke="#8b7ffb" stroke-opacity="0.3" stroke-width="1.2">
+    <line x1="150" y1="150" x2="280" y2="220"/>
+    <line x1="280" y1="220" x2="260" y2="340"/>
+    <line x1="280" y1="220" x2="420" y2="180"/>
+    <line x1="420" y1="180" x2="540" y2="240"/>
+    <line x1="420" y1="180" x2="440" y2="320"/>
+    <line x1="260" y1="340" x2="380" y2="410"/>
+    <line x1="440" y1="320" x2="380" y2="410"/>
+    <line x1="440" y1="320" x2="580" y2="380"/>
+    <line x1="540" y1="240" x2="650" y2="200"/>
+    <line x1="540" y1="240" x2="580" y2="380"/>
+    <line x1="380" y1="410" x2="480" y2="470"/>
+    <line x1="580" y1="380" x2="480" y2="470"/>
+    <line x1="150" y1="150" x2="180" y2="280"/>
+    <line x1="180" y1="280" x2="260" y2="340"/>
+  </g>
+
+  <g>
+    <circle cx="150" cy="150" r="5" fill="#a89bff"/>
+    <circle cx="280" cy="220" r="7" fill="#8b7ffb"/>
+    <circle cx="260" cy="340" r="5" fill="#2dd4bf"/>
+    <circle cx="420" cy="180" r="8" fill="#8b7ffb"/>
+    <circle cx="540" cy="240" r="6" fill="#a89bff"/>
+    <circle cx="440" cy="320" r="7" fill="#2dd4bf"/>
+    <circle cx="650" cy="200" r="5" fill="#2dd4bf"/>
+    <circle cx="580" cy="380" r="6" fill="#8b7ffb"/>
+    <circle cx="380" cy="410" r="6" fill="#a89bff"/>
+    <circle cx="480" cy="470" r="7" fill="#2dd4bf"/>
+    <circle cx="180" cy="280" r="4" fill="#a89bff"/>
+  </g>
+
+  <circle cx="420" cy="180" r="8" fill="none" stroke="#8b7ffb" stroke-width="2" opacity="0.6">
+    <animate attributeName="r" values="8;26;8" dur="2.6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0;0.6" dur="2.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="480" cy="470" r="7" fill="none" stroke="#2dd4bf" stroke-width="2" opacity="0.6">
+    <animate attributeName="r" values="7;22;7" dur="3.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0;0.6" dur="3.2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

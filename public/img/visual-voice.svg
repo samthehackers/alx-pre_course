@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Abstract visual representing real-time AI voice transformation">
+  <defs>
+    <linearGradient id="voi-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101a3a"/>
+      <stop offset="100%" stop-color="#0a0a14"/>
+    </linearGradient>
+    <radialGradient id="voi-glow" cx="70%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="voi-wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#8b7ffb"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" rx="24" fill="url(#voi-bg)"/>
+  <circle cx="580" cy="160" r="240" fill="url(#voi-glow)"/>
+
+  <!-- microphone glyph -->
+  <g transform="translate(230,230)">
+    <rect x="-26" y="-70" width="52" height="100" rx="26" fill="none" stroke="#a89bff" stroke-width="3"/>
+    <path d="M-46 10a46 46 0 0 0 92 0" fill="none" stroke="#a89bff" stroke-width="3"/>
+    <line x1="0" y1="56" x2="0" y2="86" stroke="#a89bff" stroke-width="3"/>
+    <line x1="-26" y1="86" x2="26" y2="86" stroke="#a89bff" stroke-width="3"/>
+  </g>
+
+  <!-- input -> transform -> output waveform -->
+  <g transform="translate(90,420)" stroke="#5b7590" stroke-width="4" stroke-linecap="round" opacity="0.6">
+    <line x1="0" y1="-8" x2="0" y2="8"/>
+    <line x1="14" y1="-14" x2="14" y2="14"/>
+    <line x1="28" y1="-10" x2="28" y2="10"/>
+    <line x1="42" y1="-16" x2="42" y2="16"/>
+    <line x1="56" y1="-8" x2="56" y2="8"/>
+    <line x1="70" y1="-12" x2="70" y2="12"/>
+  </g>
+
+  <path d="M230 420 h140" fill="none" stroke="#8b7ffb" stroke-width="2" stroke-dasharray="6 8" opacity="0.6"/>
+  <path d="M340 405 l16 15 l-16 15" fill="none" stroke="#8b7ffb" stroke-width="2"/>
+
+  <g transform="translate(400,420)" stroke="url(#voi-wave)" stroke-width="5" stroke-linecap="round">
+    <line x1="0" y1="-18" x2="0" y2="18"/>
+    <line x1="18" y1="-40" x2="18" y2="40"/>
+    <line x1="36" y1="-14" x2="36" y2="14"/>
+    <line x1="54" y1="-52" x2="54" y2="52"/>
+    <line x1="72" y1="-24" x2="72" y2="24"/>
+    <line x1="90" y1="-44" x2="90" y2="44"/>
+    <line x1="108" y1="-18" x2="108" y2="18"/>
+    <line x1="126" y1="-34" x2="126" y2="34"/>
+    <line x1="144" y1="-14" x2="144" y2="14"/>
+  </g>
+
+  <!-- concentric transform rings around mic -->
+  <g fill="none" stroke="#2dd4bf" stroke-opacity="0.3">
+    <circle cx="230" cy="230" r="110"/>
+    <circle cx="230" cy="230" r="146"/>
+  </g>
+
+  <g fill="#2dd4bf" opacity="0.85">
+    <circle cx="640" cy="470" r="4"/>
+    <circle cx="680" cy="500" r="3"/>
+    <circle cx="700" cy="450" r="3.5"/>
+  </g>
+  <g stroke="#2dd4bf" stroke-opacity="0.3" stroke-width="1.2">
+    <line x1="640" y1="470" x2="680" y2="500"/>
+    <line x1="640" y1="470" x2="700" y2="450"/>
+  </g>
+</svg>

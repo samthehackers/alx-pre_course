@@ -1,8 +1,9 @@
-# Demo Transaction History
+# Folklore
 
-A small demo app showing a persisted transaction history page. **All data is
-simulated sample data** — the "DEMO MODE" banner on the page makes this
-explicit, and no real payments are processed.
+A demo/prototype AI platform for real-time video and real-time voice-changer
+experiences, with credit-based usage. Built as a single Node/Express app —
+server-rendered EJS views, a small JSON-file data store, and a single
+configured demo account (no public multi-user signup).
 
 ## Run it
 
@@ -13,14 +14,36 @@ npm start
 
 Then open http://localhost:3000.
 
-## How it works
+Sign in with the demo account shown on the sign-in page
+(`demo@folklore.ai` / `FolkloreDemo123`, or use the "Use demo credentials"
+button).
 
-- On first run, `lib/transactionStore.js` seeds `data/transactions.json` with
-  a naturally-spaced chronological purchase history starting March 2026
-  through today, alternating between the two demo products:
-  - Real-Time Video Credit — $20.00
-  - Real-Time Voice Changer Credit — $10.00
-- The seed only happens once; the file is then read on every page load, so
-  refreshing the page does not regenerate or duplicate transactions.
-- The "Simulate Purchase" buttons call `POST /api/transactions/simulate` to
-  append a new transaction dated today, which is persisted the same way.
+## Structure
+
+- `server.js` — routes, session auth, view rendering, API endpoints.
+- `lib/config.js` — product/pricing config and the demo account.
+- `lib/store.js` — JSON-file persistence (`data/app-data.json`) and seed
+  generation for transactions/usage history (March 2026 → today).
+- `lib/credits.js` — centralized credit ledger: purchases, usage sessions,
+  and purchased/used/remaining balances. Nothing hardcodes a balance
+  elsewhere — every page reads from here.
+- `lib/auth.js` — single-account session login/logout + route guards.
+- `views/` — EJS templates: public marketing site, auth pages, and the
+  authenticated app (dashboard, usage, credits, billing, transactions,
+  account, real-time video, real-time voice changer).
+- `public/` — design-system CSS, per-page JS, and hand-built SVG brand
+  visuals (no external image-generation tool was available in this
+  environment, so the "AI-generated visuals" are custom SVG/gradient
+  artwork in a consistent style instead of raster images).
+
+## Notes on the prototype nature
+
+- Credit purchases are simulated — there is no real payment processor.
+  Checkout UI says so explicitly. The transaction history itself just
+  looks like a normal purchase ledger (no demo/test labels on the rows).
+- Real-Time Video uses the browser's camera via `getUserMedia` for a live
+  local preview. Real-Time Voice Changer uses the Web Audio API
+  (ring modulation / filters) to actually transform your microphone audio
+  in real time — it's a simplified DSP effect, not a neural voice model.
+- Session usage is billed at $2.00/min (video) and $1.00/min (voice) against
+  the purchased credit balance, deducted when a session stops.

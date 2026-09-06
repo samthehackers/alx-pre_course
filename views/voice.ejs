@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<%- include('partials/head', { title: 'Real-Time Voice Changer' }) %>
+</head>
+<body>
+<%- include('partials/app-shell-start', { active: 'voice', user: user }) %>
+
+  <div class="page-head">
+    <div>
+      <h1>Real-Time Voice Changer</h1>
+      <p>Transform your voice live and track credits as you go.</p>
+    </div>
+    <span class="badge badge-brand">$<%= rate.toFixed(2) %> / minute</span>
+  </div>
+
+  <% if (remaining <= 0) { %>
+    <div class="card">
+      <div class="state-block state-error">
+        <div class="state-icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>No Voice Changer credits remaining</h3>
+        <p>Purchase more credits to start a session.</p>
+        <a href="/credits" class="btn btn-primary" style="margin-top:14px;">Go to Credits</a>
+      </div>
+    </div>
+  <% } else { %>
+    <div class="session-stage">
+      <div>
+        <div class="media-frame" id="media-frame" style="aspect-ratio:16/7;">
+          <div class="media-placeholder" id="media-placeholder">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="margin:0 auto 10px;"><path d="M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3z"/><path d="M19 11a7 7 0 01-14 0"/><line x1="12" y1="18" x2="12" y2="22"/></svg>
+            Microphone input will appear here
+          </div>
+          <div class="audio-meter" id="audio-meter" style="display:none; position:absolute; left:20px; right:20px; bottom:20px;"></div>
+          <div class="rec-dot"><span class="dot"></span> LIVE</div>
+        </div>
+
+        <div class="field" style="margin-top:18px; max-width:260px;">
+          <label for="effect-select">Voice effect</label>
+          <select id="effect-select">
+            <option value="robot">Robot</option>
+            <option value="deep">Deep</option>
+            <option value="bright">Bright</option>
+          </select>
+        </div>
+
+        <div class="session-controls">
+          <button class="btn btn-primary" id="start-btn" type="button">Start Session</button>
+          <button class="btn btn-danger" id="stop-btn" type="button" disabled>Stop Session</button>
+        </div>
+        <p class="field-hint" style="margin-top:10px;">Use headphones — playing transformed audio through speakers while your mic is live can cause feedback.</p>
+      </div>
+
+      <div class="card session-panel">
+        <div class="session-metric">
+          <span class="label">Credit balance</span>
+          <span class="value" id="balance-value"><%= formatMoney(remaining) %></span>
+        </div>
+        <div class="session-metric">
+          <span class="label">Session duration</span>
+          <span class="value" id="duration-value">0:00</span>
+        </div>
+        <div class="session-metric">
+          <span class="label">Credits consumed (this session)</span>
+          <span class="value" id="consumed-value"><%= formatMoney(0) %></span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="balance-fill" style="width:100%"></div></div>
+        <p class="field-hint">Credits deduct at $<%= rate.toFixed(2) %> per minute and are recorded when you stop the session.</p>
+      </div>
+    </div>
+  <% } %>
+
+<%- include('partials/app-shell-end') %>
+<script>
+  window.FOLKLORE_VOICE = {
+    remaining: <%- JSON.stringify(remaining) %>,
+    rate: <%- JSON.stringify(rate) %>,
+  };
+</script>
+<script src="/js/voice.js"></script>
+</body>
+</html>

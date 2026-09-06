@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<%- include('partials/head', { title: 'Usage' }) %>
+</head>
+<body>
+<%- include('partials/app-shell-start', { active: 'usage', user: user }) %>
+
+  <div class="page-head">
+    <div>
+      <h1>Usage</h1>
+      <p>How your credits are being consumed across Folklore's real-time features.</p>
+    </div>
+  </div>
+
+  <div class="credit-columns" style="margin-bottom:28px;">
+    <div class="card card-pad">
+      <div class="feature-block-head">
+        <h3>Real-Time Video</h3>
+        <span class="badge badge-brand">$<%= product('video').ratePerMinute.toFixed(2) %>/min</span>
+      </div>
+      <div class="usage-row">
+        <div>
+          <div class="metric-label">Credits Purchased</div>
+          <div class="metric-value"><%= formatMoney(summary.purchased.video) %></div>
+        </div>
+        <div>
+          <div class="metric-label">Credits Used</div>
+          <div class="metric-value"><%= formatMoney(summary.used.video) %></div>
+        </div>
+        <div>
+          <div class="metric-label">Credits Remaining</div>
+          <div class="metric-value"><%= formatMoney(summary.remaining.video) %></div>
+        </div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width: <%= pct(summary.used.video, summary.purchased.video) %>%"></div></div>
+    </div>
+
+    <div class="card card-pad">
+      <div class="feature-block-head">
+        <h3>Real-Time Voice Changer</h3>
+        <span class="badge badge-brand">$<%= product('voice').ratePerMinute.toFixed(2) %>/min</span>
+      </div>
+      <div class="usage-row">
+        <div>
+          <div class="metric-label">Credits Purchased</div>
+          <div class="metric-value"><%= formatMoney(summary.purchased.voice) %></div>
+        </div>
+        <div>
+          <div class="metric-label">Credits Used</div>
+          <div class="metric-value"><%= formatMoney(summary.used.voice) %></div>
+        </div>
+        <div>
+          <div class="metric-label">Credits Remaining</div>
+          <div class="metric-value"><%= formatMoney(summary.remaining.voice) %></div>
+        </div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width: <%= pct(summary.used.voice, summary.purchased.voice) %>%"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="feature-block-head" style="padding:20px 20px 0;">
+      <h3>Usage timeline — recent sessions</h3>
+    </div>
+    <% if (!sessions.length) { %>
+      <div class="state-block">
+        <h3>No sessions yet</h3>
+        <p>Start a Real-Time Video or Voice Changer session to see it here.</p>
+      </div>
+    <% } else { %>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Feature</th>
+              <th>Duration</th>
+              <th>Credits Consumed</th>
+              <th>Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% sessions.forEach(function(s) { %>
+              <tr>
+                <td><%= formatDate(s.date) %></td>
+                <td><%= product(s.feature).label %></td>
+                <td><%= formatDuration(s.durationSeconds) %></td>
+                <td><%= formatMoney(s.creditsConsumed) %></td>
+                <td class="mono"><%= s.referenceId %></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+
+<%- include('partials/app-shell-end') %>
+</body>
+</html>

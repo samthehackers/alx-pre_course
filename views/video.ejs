@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<%- include('partials/head', { title: 'Real-Time Video' }) %>
+</head>
+<body>
+<%- include('partials/app-shell-start', { active: 'video', user: user }) %>
+
+  <div class="page-head">
+    <div>
+      <h1>Real-Time Video</h1>
+      <p>Start a live session and track credits as you go.</p>
+    </div>
+    <span class="badge badge-brand">$<%= rate.toFixed(2) %> / minute</span>
+  </div>
+
+  <% if (remaining <= 0) { %>
+    <div class="card">
+      <div class="state-block state-error">
+        <div class="state-icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>No Real-Time Video credits remaining</h3>
+        <p>Purchase more credits to start a session.</p>
+        <a href="/credits" class="btn btn-primary" style="margin-top:14px;">Go to Credits</a>
+      </div>
+    </div>
+  <% } else { %>
+    <div class="session-stage">
+      <div>
+        <div class="media-frame" id="media-frame">
+          <video id="preview" autoplay playsinline muted></video>
+          <div class="media-placeholder" id="media-placeholder">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="margin:0 auto 10px;"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg>
+            Camera preview will appear here
+          </div>
+          <div class="rec-dot"><span class="dot"></span> LIVE</div>
+        </div>
+        <div class="session-controls">
+          <button class="btn btn-primary" id="start-btn" type="button">Start Session</button>
+          <button class="btn btn-danger" id="stop-btn" type="button" disabled>Stop Session</button>
+        </div>
+      </div>
+
+      <div class="card session-panel">
+        <div class="session-metric">
+          <span class="label">Credit balance</span>
+          <span class="value" id="balance-value"><%= formatMoney(remaining) %></span>
+        </div>
+        <div class="session-metric">
+          <span class="label">Session duration</span>
+          <span class="value" id="duration-value">0:00</span>
+        </div>
+        <div class="session-metric">
+          <span class="label">Credits consumed (this session)</span>
+          <span class="value" id="consumed-value"><%= formatMoney(0) %></span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="balance-fill" style="width:100%"></div></div>
+        <p class="field-hint">Credits deduct at $<%= rate.toFixed(2) %> per minute and are recorded when you stop the session.</p>
+      </div>
+    </div>
+  <% } %>
+
+<%- include('partials/app-shell-end') %>
+<script>
+  window.FOLKLORE_VIDEO = {
+    remaining: <%- JSON.stringify(remaining) %>,
+    rate: <%- JSON.stringify(rate) %>,
+  };
+</script>
+<script src="/js/video.js"></script>
+</body>
+</html>

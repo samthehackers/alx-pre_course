@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<%- include('partials/head', { title: 'Sign In' }) %>
+</head>
+<body>
+<div class="auth-shell">
+  <div class="card auth-card">
+    <a href="/" class="brand-mark">
+      <img src="/img/logo-mark.svg" alt="" />
+      Folklore
+    </a>
+    <h1>Welcome back</h1>
+    <p class="auth-sub">Sign in to your Folklore account.</p>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="form-error"><%= error %></div>
+    <% } %>
+
+    <form method="post" action="/signin">
+      <input type="hidden" name="next" value="<%= next %>" />
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="<%= email %>" required autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="current-password" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+    </form>
+
+    <div class="demo-hint">
+      <span>Single-account demo — use: <code><%= demoEmail %></code> / <code><%= demoPassword %></code></span>
+      <button type="button" class="btn btn-ghost btn-sm" id="fill-demo">Use demo credentials</button>
+    </div>
+
+    <p class="auth-switch">New to Folklore? <a href="/signup">Create an account</a></p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('fill-demo').addEventListener('click', function () {
+    document.getElementById('email').value = <%- JSON.stringify(demoEmail) %>;
+    document.getElementById('password').value = <%- JSON.stringify(demoPassword) %>;
+  });
+</script>
+</body>
+</html>

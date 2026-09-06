@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<%- include('partials/head', { title: 'Dashboard' }) %>
+</head>
+<body>
+<%- include('partials/app-shell-start', { active: 'dashboard', user: user }) %>
+
+  <div class="page-head">
+    <div>
+      <h1>Dashboard</h1>
+      <p>Welcome back, <%= user.name %>.</p>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <a href="/video" class="btn btn-secondary btn-sm">Start Video</a>
+      <a href="/voice-changer" class="btn btn-secondary btn-sm">Start Voice Changer</a>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="card stat-card">
+      <div class="stat-label">
+        Real-Time Video Credits
+        <span class="badge badge-brand">Video</span>
+      </div>
+      <div class="stat-value"><%= formatMoney(summary.remaining.video) %></div>
+      <div class="stat-foot">of <%= formatMoney(summary.purchased.video) %> purchased remaining</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-label">
+        Real-Time Voice Changer Credits
+        <span class="badge badge-brand">Voice</span>
+      </div>
+      <div class="stat-value"><%= formatMoney(summary.remaining.voice) %></div>
+      <div class="stat-foot">of <%= formatMoney(summary.purchased.voice) %> purchased remaining</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-label">Sessions run</div>
+      <div class="stat-value"><%= usageSessions.length %></div>
+      <div class="stat-foot">across both features</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-label">Account status</div>
+      <div class="stat-value" style="font-size:1.3rem;">
+        <span class="badge badge-success">Active</span>
+      </div>
+      <div class="stat-foot">Demo account since March 2026</div>
+    </div>
+  </div>
+
+  <div class="card card-pad" style="margin-bottom:24px;">
+    <div class="feature-block-head">
+      <h3>Credit usage overview</h3>
+      <a href="/usage" class="btn btn-ghost btn-sm">View usage</a>
+    </div>
+
+    <div class="feature-block">
+      <div class="usage-row" style="grid-template-columns: 1fr; gap:8px;">
+        <span class="field-hint">Real-Time Video — <%= formatMoney(summary.used.video) %> used of <%= formatMoney(summary.purchased.video) %></span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width: <%= pct(summary.used.video, summary.purchased.video) %>%"></div></div>
+    </div>
+    <div class="feature-block">
+      <div class="usage-row" style="grid-template-columns: 1fr; gap:8px;">
+        <span class="field-hint">Real-Time Voice Changer — <%= formatMoney(summary.used.voice) %> used of <%= formatMoney(summary.purchased.voice) %></span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width: <%= pct(summary.used.voice, summary.purchased.voice) %>%"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="feature-block-head" style="padding:20px 20px 0;">
+      <h3>Recent activity</h3>
+      <a href="/transactions" class="btn btn-ghost btn-sm">View all</a>
+    </div>
+    <% if (!activity.length) { %>
+      <div class="state-block">
+        <h3>No activity yet</h3>
+        <p>Purchase credits or start a session to see activity here.</p>
+      </div>
+    <% } else { %>
+      <div>
+        <% activity.forEach(function(item) { %>
+          <div class="session-card">
+            <div class="session-meta">
+              <div class="session-icon">
+                <% if (item.type === 'purchase') { %>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg>
+                <% } else { %>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+                <% } %>
+              </div>
+              <div>
+                <strong style="font-size:0.92rem;"><%= item.label %></strong>
+                <div class="field-hint" style="margin-top:2px;"><%= formatDate(item.date) %></div>
+              </div>
+            </div>
+            <span style="font-weight:700; color: <%= item.amount < 0 ? 'var(--text)' : 'var(--success)' %>;">
+              <%= item.amount < 0 ? '-' : '+' %><%= formatMoney(Math.abs(item.amount)) %>
+            </span>
+          </div>
+        <% }); %>
+      </div>
+    <% } %>
+  </div>
+
+<%- include('partials/app-shell-end') %>
+</body>
+</html>

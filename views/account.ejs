@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<%- include('partials/head', { title: 'Account' }) %>
+</head>
+<body>
+<%- include('partials/app-shell-start', { active: 'account', user: user }) %>
+
+  <div class="page-head">
+    <div>
+      <h1>Account</h1>
+      <p>Your profile, status, and account summary.</p>
+    </div>
+  </div>
+
+  <div class="credit-columns" style="margin-bottom:24px;">
+    <div class="card card-pad">
+      <h3 style="margin-bottom:16px;">Profile</h3>
+      <div class="info-list">
+        <div class="info-row"><span>Name</span><span><%= user.name %></span></div>
+        <div class="info-row"><span>Email</span><span><%= user.email %></span></div>
+        <div class="info-row"><span>Account status</span><span><span class="badge badge-success">Active</span></span></div>
+        <div class="info-row"><span>Member since</span><span>March 2026</span></div>
+      </div>
+    </div>
+
+    <div class="card card-pad">
+      <h3 style="margin-bottom:16px;">Credit summary</h3>
+      <div class="info-list">
+        <div class="info-row"><span>Video credits remaining</span><span><%= formatMoney(summary.remaining.video) %></span></div>
+        <div class="info-row"><span>Voice credits remaining</span><span><%= formatMoney(summary.remaining.voice) %></span></div>
+        <div class="info-row"><span>Total purchased</span><span><%= formatMoney(summary.purchased.video + summary.purchased.voice) %></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="credit-columns">
+    <div class="card card-pad">
+      <h3 style="margin-bottom:16px;">Usage summary</h3>
+      <div class="info-list">
+        <div class="info-row"><span>Total sessions</span><span><%= usageSessions.length %></span></div>
+        <div class="info-row"><span>Video credits used</span><span><%= formatMoney(summary.used.video) %></span></div>
+        <div class="info-row"><span>Voice credits used</span><span><%= formatMoney(summary.used.voice) %></span></div>
+      </div>
+    </div>
+
+    <div class="card card-pad">
+      <h3 style="margin-bottom:16px;">Billing summary</h3>
+      <div class="info-list">
+        <div class="info-row"><span>Transactions on record</span><span><%= transactionCount %></span></div>
+        <div class="info-row"><span>Payment method</span><span>Demo Card •••• 4242</span></div>
+        <div class="info-row"><span>Billing model</span><span>Pay-as-you-go credits</span></div>
+      </div>
+      <a href="/billing" class="btn btn-secondary btn-block" style="margin-top:18px;">Go to Billing</a>
+    </div>
+  </div>
+
+  <div class="card card-pad" style="margin-top:24px;">
+    <form method="post" action="/signout">
+      <button type="submit" class="btn btn-danger">Sign Out</button>
+    </form>
+  </div>
+
+<%- include('partials/app-shell-end') %>
+</body>
+</html>

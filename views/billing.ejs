@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<%- include('partials/head', { title: 'Billing' }) %>
+</head>
+<body>
+<%- include('partials/app-shell-start', { active: 'billing', user: user }) %>
+
+  <div class="page-head">
+    <div>
+      <h1>Billing</h1>
+      <p>Balances, purchase history, and payment details for your account.</p>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="card stat-card">
+      <div class="stat-label">Video credits remaining</div>
+      <div class="stat-value"><%= formatMoney(summary.remaining.video) %></div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-label">Voice credits remaining</div>
+      <div class="stat-value"><%= formatMoney(summary.remaining.voice) %></div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-label">Total purchased to date</div>
+      <div class="stat-value"><%= formatMoney(summary.purchased.video + summary.purchased.voice) %></div>
+    </div>
+  </div>
+
+  <div class="credit-columns" style="margin-bottom:24px;">
+    <div class="card card-pad">
+      <h3 style="margin-bottom:16px;">Payment information</h3>
+      <div class="info-list">
+        <div class="info-row"><span>Payment method</span><span>Demo Card •••• 4242</span></div>
+        <div class="info-row"><span>Billing status</span><span><span class="badge badge-success">Active</span></span></div>
+        <div class="info-row"><span>Billing model</span><span>Pay-as-you-go credits</span></div>
+        <div class="info-row"><span>Next scheduled charge</span><span>None</span></div>
+      </div>
+    </div>
+
+    <div class="card card-pad">
+      <h3 style="margin-bottom:16px;">Purchase credits</h3>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <button class="btn btn-primary btn-block purchase-btn" data-product="video">
+          <span class="btn-label">Real-Time Video — <%= formatMoney(product('video').amount) %></span>
+          <span class="spinner"></span>
+        </button>
+        <button class="btn btn-primary btn-block purchase-btn" data-product="voice">
+          <span class="btn-label">Real-Time Voice Changer — <%= formatMoney(product('voice').amount) %></span>
+          <span class="spinner"></span>
+        </button>
+      </div>
+      <div class="checkout-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Folklore is a prototype platform. Checkout is simulated — no real payment processor is connected and no charge occurs.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="feature-block-head" style="padding:20px 20px 0;">
+      <h3>Recent purchases</h3>
+      <a href="/transactions" class="btn btn-ghost btn-sm">View full history</a>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Date</th><th>Description</th><th>Amount</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <% recentTransactions.forEach(function(t) { %>
+            <tr>
+              <td><%= formatDate(t.date) %></td>
+              <td><%= t.description %></td>
+              <td><%= formatMoney(t.amount) %></td>
+              <td><span class="badge badge-success"><%= t.status %></span></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<%- include('partials/app-shell-end') %>
+<script src="/js/credits.js"></script>
+</body>
+</html>

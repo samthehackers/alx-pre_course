@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<%- include('partials/head', { title: 'Credits' }) %>
+</head>
+<body>
+<%- include('partials/app-shell-start', { active: 'credits', user: user }) %>
+
+  <div class="page-head">
+    <div>
+      <h1>Credits</h1>
+      <p>Manage your Real-Time Video and Voice Changer credit balances.</p>
+    </div>
+  </div>
+
+  <div class="credit-columns">
+    <div class="card credit-card">
+      <div class="credit-top">
+        <span class="badge badge-brand">Real-Time Video</span>
+      </div>
+      <div>
+        <div class="metric-label">Available</div>
+        <div class="credit-amount"><%= formatMoney(summary.remaining.video) %></div>
+      </div>
+      <button class="btn btn-primary btn-block purchase-btn" data-product="video">
+        <span class="btn-label">Purchase Credits — <%= formatMoney(product('video').amount) %></span>
+        <span class="spinner"></span>
+      </button>
+      <div class="checkout-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>This is a prototype checkout — the purchase is simulated and no real payment is processed.</span>
+      </div>
+    </div>
+
+    <div class="card credit-card">
+      <div class="credit-top">
+        <span class="badge badge-brand">Real-Time Voice Changer</span>
+      </div>
+      <div>
+        <div class="metric-label">Available</div>
+        <div class="credit-amount"><%= formatMoney(summary.remaining.voice) %></div>
+      </div>
+      <button class="btn btn-primary btn-block purchase-btn" data-product="voice">
+        <span class="btn-label">Purchase Credits — <%= formatMoney(product('voice').amount) %></span>
+        <span class="spinner"></span>
+      </button>
+      <div class="checkout-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>This is a prototype checkout — the purchase is simulated and no real payment is processed.</span>
+      </div>
+    </div>
+  </div>
+
+<%- include('partials/app-shell-end') %>
+<script src="/js/credits.js"></script>
+</body>
+</html>

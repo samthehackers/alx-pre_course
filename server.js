@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 const credits = require('./lib/credits');
 const auth = require('./lib/auth');
 const { PRODUCTS } = require('./lib/config');
@@ -37,11 +37,10 @@ app.locals.product = (key) => PRODUCTS[key];
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
-  session({
-    secret: 'folklore-demo-session-secret',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+  cookieSession({
+    name: 'folklore.sid',
+    keys: ['folklore-demo-session-secret'],
+    maxAge: 1000 * 60 * 60 * 24,
   })
 );
 app.use(auth.attachUser);
@@ -189,6 +188,10 @@ app.post('/api/usage/record', auth.requireApiAuth, (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Folklore listening on http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Folklore listening on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

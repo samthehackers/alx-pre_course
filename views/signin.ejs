@@ -21,7 +21,7 @@
       <input type="hidden" name="next" value="<%= next %>" />
       <div class="field">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" value="<%= email %>" required autocomplete="email" />
+        <input type="email" id="email" name="email" value="<%= email %>" required autocomplete="email" autofocus />
       </div>
       <div class="field">
         <label for="password">Password</label>
@@ -30,20 +30,8 @@
       <button type="submit" class="btn btn-primary btn-block">Sign In</button>
     </form>
 
-    <div class="demo-hint">
-      <span>Single-account demo — use: <code><%= demoEmail %></code> / <code><%= demoPassword %></code></span>
-      <button type="button" class="btn btn-ghost btn-sm" id="fill-demo">Use demo credentials</button>
-    </div>
-
-    <p class="auth-switch">New to Folklore? <a href="/signup">Create an account</a></p>
+    <p class="auth-switch">Don't have access? <a href="/signup">Request access</a></p>
   </div>
 </div>
-
-<script>
-  document.getElementById('fill-demo').addEventListener('click', function () {
-    document.getElementById('email').value = <%- JSON.stringify(demoEmail) %>;
-    document.getElementById('password').value = <%- JSON.stringify(demoPassword) %>;
-  });
-</script>
 </body>
 </html>

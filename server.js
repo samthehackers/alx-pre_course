@@ -54,10 +54,8 @@ app.get('/signin', (req, res) => {
   if (req.session.authenticated) return res.redirect('/dashboard');
   res.render('signin', {
     error: null,
-    email: auth.DEMO_ACCOUNT.email,
+    email: '',
     next: req.query.next || '/dashboard',
-    demoEmail: auth.DEMO_ACCOUNT.email,
-    demoPassword: auth.DEMO_ACCOUNT.password,
   });
 });
 
@@ -68,11 +66,9 @@ app.post('/signin', (req, res) => {
     return res.redirect(next && next.startsWith('/') ? next : '/dashboard');
   }
   res.status(401).render('signin', {
-    error: 'Incorrect email or password for the demo account.',
+    error: 'Incorrect email or password.',
     email,
     next: next || '/dashboard',
-    demoEmail: auth.DEMO_ACCOUNT.email,
-    demoPassword: auth.DEMO_ACCOUNT.password,
   });
 });
 
@@ -80,14 +76,7 @@ app.get('/signup', (req, res) => {
   if (req.session.authenticated) return res.redirect('/dashboard');
   res.render('signup', {
     next: req.query.next || '/dashboard',
-    demoEmail: auth.DEMO_ACCOUNT.email,
   });
-});
-
-app.post('/signup', (req, res) => {
-  auth.login(req);
-  const next = req.body.next;
-  res.redirect(next && next.startsWith('/') ? next : '/dashboard');
 });
 
 app.post('/signout', (req, res) => {

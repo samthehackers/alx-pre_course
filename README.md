@@ -14,14 +14,11 @@ npm start
 
 Then open http://localhost:3000.
 
-### Demo Login
+### Access
 
-The app runs on a single configured account so anyone can explore it without
-registering. On the sign-in page, either fill in the credentials shown there
-or click **Use demo credentials** to autofill them:
-
-- Email: `demo@folklore.ai`
-- Password: `FolkloreDemo123`
+The app runs on a single managed account rather than open registration.
+Credentials are shared directly by the site owner — the Sign Up page points
+visitors to request access, then sign in with the credentials they're given.
 
 ## Structure
 

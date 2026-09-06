@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<%- include('partials/head', { title: 'Sign Up' }) %>
+<%- include('partials/head', { title: 'Request Access' }) %>
 </head>
 <body>
 <div class="auth-shell">
@@ -10,18 +10,10 @@
       <img src="/img/logo-mark.svg" alt="" />
       Folklore
     </a>
-    <h1>Create your account</h1>
-    <p class="auth-sub">Folklore is currently a single-account demo platform.</p>
+    <h1>Request access</h1>
+    <p class="auth-sub">Folklore runs on a single managed account. Reach out to the owner for access, then sign in below.</p>
 
-    <div class="demo-hint" style="margin-top:24px;">
-      <span>There's one configured demo account for this prototype — email <code><%= demoEmail %></code>.
-      Use the button below to access it instantly, no form required.</span>
-    </div>
-
-    <form method="post" action="/signup" style="margin-top:22px;">
-      <input type="hidden" name="next" value="<%= next %>" />
-      <button type="submit" class="btn btn-primary btn-block">Continue to Demo Account</button>
-    </form>
+    <a href="/signin" class="btn btn-primary btn-block" style="margin-top:24px;">Go to Sign In</a>
 
     <p class="auth-switch">Already have access? <a href="/signin">Sign in instead</a></p>
   </div>

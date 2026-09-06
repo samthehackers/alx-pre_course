@@ -911,24 +911,6 @@ table.data-table {
   margin-top: 28px;
 }
 
-.demo-hint {
-  background: var(--brand-light);
-  color: var(--text);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  font-size: 0.85rem;
-  margin-top: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.demo-hint code {
-  font-family: var(--font-mono);
-}
-
 .auth-switch {
   text-align: center;
   margin-top: 22px;
